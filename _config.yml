@@ -20,11 +20,10 @@ sidebar-avatar: /img/avatar-ph.jpg      # use absolute URL, seeing it's used in 
 
 # SNS settings
 RSS: false
-weibo_username:     一枝梅不落
-zhihu_username:     
-github_username:    greatgeek
-facebook_username:  
-jianshu_username:   
+weibo_username: u/1925365737?is_hot=1
+zhihu_username: zhihu  
+github_username: greatgeek
+facebook_username: facebook
 #twitter_username:   
 
 
