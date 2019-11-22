@@ -15,7 +15,7 @@ sidebar-about-description: "生活除了从一而终，还有随机应变！"
 sidebar-avatar: /img/avatar-ph.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 # theme
-theme: minimal-mistakes-jekyll
+# theme: jekyll-theme-slate
 # minimal_mistake_skin: "air"
 
 # SNS settings
