@@ -1,0 +1,114 @@
+I"C<p>sed 的全名叫 stream editor, 流编辑器,用程序的方式来编辑文本.</p>
+<h3 id="用s命令替换substitute">用s命令替换(substitute)</h3>
+<p>这是手机 <strong>linux</strong> 目录 /data/misc/wifi/ 下的<strong>wpa_supplicant.conf</strong> 文件内容:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">ctrl_interface</span><span class="o">=</span>wlan0
+<span class="nv">disable_scan_offload</span><span class="o">=</span>1
+<span class="nv">update_config</span><span class="o">=</span>1
+<span class="nv">device_name</span><span class="o">=</span>soju
+<span class="nv">manufacturer</span><span class="o">=</span>Samsung
+<span class="nv">model_name</span><span class="o">=</span>Nexus S
+<span class="nv">model_number</span><span class="o">=</span>Nexus S
+<span class="nv">serial_number</span><span class="o">=</span>39318E6D5B4C00EC
+<span class="nv">device_type</span><span class="o">=</span>10-0050F204-5
+<span class="nv">config_methods</span><span class="o">=</span>physical_display virtual_push_button
+<span class="nv">p2p_disabled</span><span class="o">=</span>1
+<span class="nv">p2p_no_group_iface</span><span class="o">=</span>1
+
+
+<span class="nv">network</span><span class="o">={</span>
+	<span class="nv">ssid</span><span class="o">=</span><span class="s2">"asd"</span>
+	<span class="nv">key_mgmt</span><span class="o">=</span>NONE
+	<span class="nv">auth_alg</span><span class="o">=</span>OPEN SHARED
+	<span class="nv">mode</span><span class="o">=</span>1
+	<span class="nv">frequency</span><span class="o">=</span>2412
+<span class="o">}</span>
+</code></pre></div></div>
+<p>由于在手机中vim编辑工具存在编辑失灵的情况,就需要流编辑器直接修改.
+我需要修改第3行 <strong>update_config=1</strong>, 将其值改为 <strong>0</strong>.这样手机在连接上网络后就不会再记录该网络的名称,加密方式等属性,我要确保文件中只存在需要的网络.
+使用以下命令进行修改:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sed</span> <span class="nt">-i</span> <span class="s2">"s/update_config=1/update_config=0/g"</span> wpa_supplicant.conf
+</code></pre></div></div>
+<ul>
+  <li>-i [SUFFIX], –in-place[=SUFFIX] :<strong>edit files in place (makes backup if SUFFIX supplied)</strong></li>
+  <li>s :<strong>substitute</strong></li>
+  <li>g : <strong>global</strong></li>
+</ul>
+
+<h3 id="删除指定行">删除指定行</h3>
+<p>若是在上述文件中有存在一个不需要的网络,例:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">ctrl_interface</span><span class="o">=</span>wlan0
+<span class="nv">disable_scan_offload</span><span class="o">=</span>1
+<span class="nv">update_config</span><span class="o">=</span>1
+<span class="nv">device_name</span><span class="o">=</span>soju
+<span class="nv">manufacturer</span><span class="o">=</span>Samsung
+<span class="nv">model_name</span><span class="o">=</span>Nexus S
+<span class="nv">model_number</span><span class="o">=</span>Nexus S
+<span class="nv">serial_number</span><span class="o">=</span>39318E6D5B4C00EC
+<span class="nv">device_type</span><span class="o">=</span>10-0050F204-5
+<span class="nv">config_methods</span><span class="o">=</span>physical_display virtual_push_button
+<span class="nv">p2p_disabled</span><span class="o">=</span>1
+<span class="nv">p2p_no_group_iface</span><span class="o">=</span>1
+
+<span class="nv">network</span><span class="o">={</span>
+	<span class="nv">ssid</span><span class="o">=</span><span class="s2">"nouse"</span>
+	<span class="nv">key_mgmt</span><span class="o">=</span>NONE
+	<span class="nv">auth_alg</span><span class="o">=</span>OPEN SHARED
+	<span class="nv">mode</span><span class="o">=</span>1
+	<span class="nv">frequency</span><span class="o">=</span>2412
+<span class="o">}</span>
+
+<span class="nv">network</span><span class="o">={</span>
+	<span class="nv">ssid</span><span class="o">=</span><span class="s2">"asd"</span>
+	<span class="nv">key_mgmt</span><span class="o">=</span>NONE
+	<span class="nv">auth_alg</span><span class="o">=</span>OPEN SHARED
+	<span class="nv">mode</span><span class="o">=</span>1
+	<span class="nv">frequency</span><span class="o">=</span>2412
+<span class="o">}</span>
+</code></pre></div></div>
+<p>我们需要确定是哪几行,有一个命令可以帮助我们带<strong>行号</strong>展示内容:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> <span class="nt">-n</span> wpa_supplicant.conf
+</code></pre></div></div>
+<ul>
+  <li>-n : <strong>number</strong></li>
+</ul>
+
+<p>像这样:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     1	<span class="nv">ctrl_interface</span><span class="o">=</span>wlan0
+     2	<span class="nv">disable_scan_offload</span><span class="o">=</span>1
+     3	<span class="nv">update_config</span><span class="o">=</span>0
+     4	<span class="nv">device_name</span><span class="o">=</span>soju
+     5	<span class="nv">manufacturer</span><span class="o">=</span>Samsung
+     6	<span class="nv">model_name</span><span class="o">=</span>Nexus S
+     7	<span class="nv">model_number</span><span class="o">=</span>Nexus S
+     8	<span class="nv">serial_number</span><span class="o">=</span>39318E6D5B4C00EC
+     9	<span class="nv">device_type</span><span class="o">=</span>10-0050F204-5
+    10	<span class="nv">config_methods</span><span class="o">=</span>physical_display virtual_push_button
+    11	<span class="nv">p2p_disabled</span><span class="o">=</span>1
+    12	<span class="nv">p2p_no_group_iface</span><span class="o">=</span>1
+    13	
+    14	<span class="nv">network</span><span class="o">={</span>
+    15		<span class="nv">ssid</span><span class="o">=</span><span class="s2">"nouse"</span>
+    16		<span class="nv">key_mgmt</span><span class="o">=</span>NONE
+    17		<span class="nv">auth_alg</span><span class="o">=</span>OPEN SHARED
+    18		<span class="nv">mode</span><span class="o">=</span>1
+    19		<span class="nv">frequency</span><span class="o">=</span>2412
+    20	<span class="o">}</span>
+    21	
+    22	<span class="nv">network</span><span class="o">={</span>
+    23		<span class="nv">ssid</span><span class="o">=</span><span class="s2">"asd"</span>
+    24		<span class="nv">key_mgmt</span><span class="o">=</span>NONE
+    25		<span class="nv">auth_alg</span><span class="o">=</span>OPEN SHARED
+    26		<span class="nv">mode</span><span class="o">=</span>1
+    27		<span class="nv">frequency</span><span class="o">=</span>2412
+    28	<span class="o">}</span>
+</code></pre></div></div>
+<p>需要删除从14行到20行:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sed</span> <span class="nt">-i</span> <span class="s2">"14,20d"</span> wpa_supplicant.conf
+</code></pre></div></div>
+<ul>
+  <li>d : <strong>delete</strong></li>
+</ul>
+
+<h3 id="学习更多">学习更多</h3>
+<p><a href="https://coolshell.cn/articles/9104.html">SED 简明教程</a></p>
+:ET
