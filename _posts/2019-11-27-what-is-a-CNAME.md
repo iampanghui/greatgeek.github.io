@@ -18,6 +18,8 @@ The record A specifies IP address (IPv4) for given host. A records are used for 
 ### IP Version 6 Address records (AAAA)
 The record AAAA (also quad-A record) specifies IPv6 address for given host. So it works the same way as the A record and the differences is the type of IP address.
 
+**IP v4 地址为32位, IP v6地址为128位. 128/32=4, 既然IP v4的地址映射记录为A, 那么IP v6的地址映射记录为AAAA**
+
 ### Canonical Name records(CNAME)
 The CNAME record specifies a domain name that has to be queried in order to resolve the original DNS query. Therefore CNAME records are used for creating aliases of domain names. CNAME records are truly useful when we want to alias our domain to an external domain. In other cases we can remove CNAME records and replace them with A records and even decrease performance overhead.
 
