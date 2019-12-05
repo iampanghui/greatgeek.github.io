@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:	与C++之父对话
-subtitle:   Talking C++: An Interview with Bjarne Stroustrup
+subtitle:   Talking C++  An Interview with Bjarne Stroustrup
 date:       2019-11-21
 author: 	庞晖
 header-img: img/Bjarned-Stroustrup-and-Sonny-Li.jpg
