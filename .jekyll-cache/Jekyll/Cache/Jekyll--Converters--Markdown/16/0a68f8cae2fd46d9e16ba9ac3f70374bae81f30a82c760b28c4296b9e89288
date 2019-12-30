@@ -1,0 +1,40 @@
+I"<<h3 id="如何对象的字段方法导出export">如何对象的字段方法导出(export)</h3>
+<p>Go 中没有类,不过可以为结构体类型定义方法. 方法就是一类带特殊的<strong>接收者</strong>参数的函数. 将一个对象清晰地划分为:<strong>字段与方法</strong>,也就是内容与行为. Go 中并没有public 或 private关键字, 想要在另外的包下访问当前对象的字段与方法,将字段与方法导出(export). 若没有经过导出的字段与方法只能在当前包下使用.</p>
+
+<p>摘自:
+<a href="https://golang.org/ref/spec#Exported_identifiers">Exported identifiers</a></p>
+
+<p>An identifier may be exported to permit access to it from another package. An identifier is exported if both:</p>
+
+<ol>
+  <li>the first character of the identifier’s name is a Unicode <strong>upper case letter</strong>(Unicode class “Lu”); and</li>
+  <li>the identifier is declared in the package block or it is a field name or method.</li>
+</ol>
+
+<p>All other identifiers are not exported.</p>
+
+<p>一句话概括就是:只有首字母大写的标识符能导出, 其余标识符都不能导出.</p>
+
+<p>例如:</p>
+<pre><code class="language-Go">package mypackage
+
+import(
+	"fmt"
+	"math"
+)
+
+type Vertex struct {
+	X, y float64
+}
+
+func (v Vertex) Abs() float64 {
+	return math.Sqrt(v.X*v.X + v.y*v.y)
+}
+
+func (v Vertex) myAbs() float64{
+	return math.Sqrt(v.X*v.X + v.y*v.y)
+}
+</code></pre>
+
+<p>当前对象中,X字段与Abs()方法是已导出的,可以在其他包下访问, 而y字段与myAbs()方法是未导出的,无法在其他包下访问.</p>
+:ET

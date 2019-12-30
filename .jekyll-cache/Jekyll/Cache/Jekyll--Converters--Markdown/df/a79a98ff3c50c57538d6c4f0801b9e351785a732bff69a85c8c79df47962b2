@@ -1,0 +1,17 @@
+I"�<h3 id="ndk-debugging-does-not-start-package-is-unknown">NDK debugging does not start: “package is unknown”</h3>
+<p>This is a known bug of the Android platform. When you try to debug your NDK-based app, gdbserver fails to start and a message like below is shown:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>run-as: Package 'XXX' is unknown
+</code></pre></div></div>
+
+<h3 id="works-for-nexus-s">Works for Nexus s</h3>
+<h4 id="add-the-set-uid-bit-to-the-run-as-binary">Add the set-uid bit to the run-as binary:</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>su
+</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mount <span class="nt">-o</span> remount,rw /system
+</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">chmod </span>4750 /system/bin/run-as
+</code></pre></div></div>
+<p>###参考来源
+<a href="http://visualgdb.com/KB/?ProblemID=nopkg">NDK debugging does not start: “package is unknown”</a></p>
+:ET

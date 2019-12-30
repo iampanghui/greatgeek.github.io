@@ -1,0 +1,13 @@
+I"�<h3 id="what-is-remount-in-linux">What is remount in Linux</h3>
+
+<h4 id="from-book-unix-and-linux-system-administration-handbook">from book: Unix and Linux system administration handbook</h4>
+<p>In many single-user environments, the filesystem root directory starts off being mounted read-only. If <strong>/etc</strong> is part of the root filesystem(the usual case), it will be impossible to edit many important configuration files. To fix this problem, you’ll have to begin your single-user session by remounting <strong>/</strong> in read/write mode. Under Linux, the command</p>
+
+<p><code class="highlighter-rouge"># mount -o rw,remount /</code></p>
+
+<p>usually does the trick.</p>
+
+<h4 id="from-book-linux-command-line-and-shell-scripting-bible">from book: Linux Command Line and Shell Scripting BIBLE</h4>
+<p><strong>Tip:</strong>
+You can run the <code class="highlighter-rouge">fsck</code> command on unmounted filesystems only. For most filesystems, you can just unmount the filesystem to check it and then remount it when you’re finished. However, because the root filesystem contains all the core Linux commands and log files, you can’t unmount it on a running system.</p>
+:ET

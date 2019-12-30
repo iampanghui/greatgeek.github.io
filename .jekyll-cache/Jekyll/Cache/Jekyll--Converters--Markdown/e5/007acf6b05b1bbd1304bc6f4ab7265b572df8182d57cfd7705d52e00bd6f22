@@ -1,0 +1,13 @@
+I"<h3 id="数据包的粘包问题解决方法">数据包的粘包问题解决方法</h3>
+<p>解决粘包就是要正确分割字节流中的数据.一般有以下做法:</p>
+<ol>
+  <li>定长分隔(每个数据包最大为该长度),缺点是数据不足时会浪费传输资源;</li>
+  <li>特定字符分隔(如<code class="highlighter-rouge">\r\n</code>), 缺点是如果正文中有<code class="highlighter-rouge">\r\n</code>就会导致问题;</li>
+  <li>在数据包中添加长度字段</li>
+</ol>
+
+<p>在 <strong>golang</strong> 中提供了 <code class="highlighter-rouge">bufio.Scanner</code>来解决粘包问题.</p>
+
+<h3 id="参考来源">参考来源</h3>
+<p><a href="https://www.ddhigh.com/2018/03/02/golang-tcp-stick-package.html">golang解决TCP粘包问题</a></p>
+:ET
