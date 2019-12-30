@@ -27,5 +27,5 @@ mount -o remount,rw /system
 ```bash
 chmod 4750 /system/bin/run-as
 ```
-###参考来源
+### 参考来源
 [NDK debugging does not start: "package is unknown"](http://visualgdb.com/KB/?ProblemID=nopkg)
